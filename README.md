@@ -1,19 +1,36 @@
 # LeanTemplate
 
-**TODO: Add description**
+A template that has less stuff in it that the standard one. For example, the mix.exs file will look like:
 
-## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `lean_template` to your list of dependencies in `mix.exs`:
+~~~ elixir
+defmodule Sss.Mixfile do
+  use Mix.Project
 
-```elixir
-def deps do
-  [{:lean_template, "~> 0.1.0"}]
+  @version   "0.1.0"
+
+  @deps  [
+    # eg:  { :my_dep, "~> 0.3.0" }   –or–
+    # { :my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0" }
+  ]
+
+
+  ############################################################
+
+  def project do
+    in_production Mix.env == :prod
+    [
+      app:      :sss,
+      version:  @version,
+      elixir:   "~> 1.5-dev",
+      deps:     @deps,
+      build_embedded:  in_production,
+      start_permanent: in_production,
+    ]
+  end
+
+  def application do
+        [extra_applications: [:logger]]
+  end
 end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/lean_template](https://hexdocs.pm/lean_template).
-
+~~~
